@@ -2,8 +2,11 @@
 #include <String>
 #include <map>
 #include <iomanip>
+#include <vector>
 
 using namespace std;
+vector<string> mapa_c = {'I', 'IV', 'V', 'IX', 'X', 'XL', 'L', 'LC', 'C', 'CD', 'D', 'DM', 'M'};
+vector<int> mapa_i = {    1,    4};
 
 const char tb_c[7] = {'I', 'V', 'X', 'L', 'C',  'D',  'M'   };
 const int  tb_i[7] = { 1,   5,   10,  50,  100,  500,  1000};
