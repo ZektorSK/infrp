@@ -6,19 +6,99 @@
 using namespace std;
 
 const char tb_c[7] = {'I', 'V', 'X', 'L', 'C',  'D',  'M'   };
-const char tbi_c[7]= {'1', '5', '10','50','100','500','1000'};
 const int  tb_i[7] = { 1,   5,   10,  50,  100,  500,  1000};
+const char tb_cs[6] = {'IV', 'IX',  'XL', 'LC', 'CD', 'DM'};
+const char tb_is[6] = { 4,     9,    40,  90,   400,  900};
 
 void Ciara(){
 	cout<<"--------------------------"<<endl;
 }
 
-string a_na_r(string n){
-	string vysledok = "";
+int velkost(int n){
+	if(n >= 1000)
+	{
+		return 1000;
+	}else if(n < 1000 && n >= 100){
+		if(n%500==0){
+			return 500;
+		}else{
+			return 100;			
+		}
+	}else if(n < 100 && n >= 10){
+		if(n%50==0){
+			return 50;
+		}else{
+			return 10;			
+		}
+	}else{
+		if(n%5==0){
+			return 5;
+		}else{
+			return 1;			
+		}
+	}
+}
+
+int najdiPoziciuCislaS(int n){
+	int v = -1;
+	for(int i = 0; i < 6; i++){
+		if(tb_is[i] == n){
+			v = i;
+		}
+	}	
+	return v;
+}
+
+int najdiPoziciuCisla(int n){
+	int v = -1;
+	for(int i = 0; i < 7; i++){
+		if(tb_i[i] == n){
+			v = i;
+		}
+	}
 	
-	int d = n.length();
-	for(int i = 0; i < d; i++){
+	if(v == -1)
+	{
+		najdiPoziciuCislaS(n);
+	}
+	return v;	
+}
+
+string a_na_r(int n){
+	string vysledok;
+	
+	int zvysok=n;
+	
+	while(true){
+		if(n < 5){
+			int pozCisla = najdiPoziciuCisla(tb_i[i]);
+			for(int i = n; i >= 1; i--){
+				if(v != -1){
+					vysledok+=tb_c[pozCisla];					
+				}else{
+					vylsedok+=tb_cs[pozCisla];	
+				}
+
+			}
+			break;			
+		}
 		
+		for(int i = 6; i >= 0; i--){
+			n=zvysok/tb_i[i];
+			zvysok=zvysok%tb_i[i];
+			
+			cout<<"n: "<<n<<endl;
+			cout<<"zvysok: "<<zvysok<<endl;
+			
+			int pozCisla = najdiPoziciuCisla(tb_i[i]);
+			for(int i = n; i >= 1; i--){
+				if(v != -1){
+					vysledok+=tb_c[pozCisla];					
+				}else{
+					vylsedok+=tb_cs[pozCisla];	
+				}
+			}
+		}
 	}
 	
 	return vysledok;
@@ -80,7 +160,7 @@ int main()
 	
 	Ciara();
 	
-	string a_vstup;
+	int a_vstup;
 	string r_vstup;
 	switch(k)
 	{
